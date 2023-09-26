@@ -1,0 +1,44 @@
+<template>
+	<div>
+		<div class="row col-lg-12">
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6">
+				{{ password }}
+				<form @submit.prevent="login" class="mt-5">
+					<h3 class="text-center">LOGIN</h3>
+					<div class="container">
+						<label for="uname"><b>Username</b></label>
+						<input type="text" v-model="item.email" placeholder="Enter Username" name="uname" required>
+
+						<label for="psw"><b>Password</b></label>
+						<input type="password" v-model="item.password" placeholder="Enter Password" name="psw" required>
+
+						<button type="submit">Login</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</template>
+<script>
+import axios from 'axios';
+export default{
+	name:"Login",
+	data(){
+		return {
+			item:{
+				email:'',
+				password:''
+			}
+		}
+	},
+	methods:{
+		login(){
+			axios.post('http://localhost:8000/api/login',this.item)
+				.then(res=>{
+					console.log(res.data);
+				});
+		}
+	}
+}
+</script>
