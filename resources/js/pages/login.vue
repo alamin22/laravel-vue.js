@@ -1,5 +1,7 @@
 <template>
+	
 	<div>
+		<action @myAddress="actionHere($event)" name="alamin" designation="Software Engineer"/>
 		<div class="row col-lg-12">
 			<div class="col-lg-3"></div>
 			<div class="col-lg-6">
@@ -13,7 +15,7 @@
 						<label for="psw"><b>Password</b></label>
 						<input type="password" v-model="item.password" placeholder="Enter Password" name="psw" required>
 
-						<button type="submit">Login</button>
+						<button type="submit">Login {{ address }}</button>
 					</div>
 				</form>
 			</div>
@@ -22,6 +24,7 @@
 </template>
 <script>
 import axios from 'axios';
+import action from './action.vue'
 export default{
 	name:"Login",
 	data(){
@@ -29,7 +32,8 @@ export default{
 			item:{
 				email:'',
 				password:''
-			}
+			},
+			address:'',
 		}
 	},
 	methods:{
@@ -38,7 +42,13 @@ export default{
 				.then(res=>{
 					console.log(res.data);
 				});
+		},
+		actionHere(data){
+			this.address = data;
 		}
+	},
+	components:{
+		action:action,
 	}
 }
 </script>
