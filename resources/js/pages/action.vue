@@ -7,7 +7,7 @@
                         <button >{{ name }}</button>
                     </div>
                     <div class="bg-warning desig" style="width:50%;height:200px">
-                        {{ designation }}
+                        {{ designation }} {{ isImportant }}
                     </div>
                </div> 
                
@@ -45,6 +45,12 @@ export default{
         myEvent(){
             this.$emit('myAddress','joypurhat')
         }
+    },
+    computed:{
+        isImportant(){
+            return 'Computed attribute vue';
+        }
+        
     }
 }
 </script>

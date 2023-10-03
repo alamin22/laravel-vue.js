@@ -1,7 +1,6 @@
 <template>
 	
 	<div>
-		<action @myAddress="actionHere($event)" name="alamin" designation="Software Engineer"/>
 		<div class="row col-lg-12">
 			<div class="col-lg-3"></div>
 			<div class="col-lg-6">
@@ -20,11 +19,12 @@
 				</form>
 			</div>
 		</div>
+		<action @myAddress="actionHere($event)" name="alamin" designation="Software Engineer"/>
 	</div>
 </template>
 <script>
 import axios from 'axios';
-import action from './action.vue'
+import action from './action.vue';
 export default{
 	name:"Login",
 	data(){
@@ -40,7 +40,12 @@ export default{
 		login(){
 			axios.post('http://localhost:8000/api/login',this.item)
 				.then(res=>{
-					console.log(res.data);
+					if(res.data.status=='success'){//redirect route
+						localStorage.setItem('token',res.data.token) 
+						this.$router.push('/admin/pannel')
+						
+					}
+					 console.log(res.data);
 				});
 		},
 		actionHere(data){
